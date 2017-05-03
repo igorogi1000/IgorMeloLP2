@@ -1,76 +1,87 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ConsoleApplication1
+namespace exercicios_lp2
 {
-
-    // (Revisão de subrotinas)
     class Program
     {
+        // (Revisão de struct)
 
+        struct Carro
+        {
+            public string nome;
+            public double kmRodados;
+            public int potenciaMotor;
+        }
 
-        static string Classificar(string nome, double kmRodados, int potenciaMotor)
+        static string Classificar(Carro carrito)
         {
             string idade;
             string potenciaPorExtenso;
 
             //Idade do carro
-            if (kmRodados <= 5000)
+            if (carrito.kmRodados <= 5000)
                 idade = "novo";
 
-            else if (kmRodados > 5000 && kmRodados <= 30000)
+            else if (carrito.kmRodados > 5000 && carrito.kmRodados <= 30000)
                 idade = "seminovo";
 
             else
                 idade = "velho";
 
             //Potencia 
-            if (potenciaMotor >= 120 && potenciaMotor <= 200)
+            if (carrito.potenciaMotor >= 120 && carrito.potenciaMotor <= 200)
                 potenciaPorExtenso = "forte";
 
-            else if (potenciaMotor > 200)
+            else if (carrito.potenciaMotor > 200)
                 potenciaPorExtenso = "potente";
 
             else
                 potenciaPorExtenso = "popular";
 
-            return nome + " " + idade + " " + potenciaPorExtenso;
+            //return carrito.nome + " " + idade + " " + potenciaPorExtenso;
+            return String.Format("{0} - {1} - {2}", carrito.nome, idade, potenciaPorExtenso);
         }
+
+
+
+
 
         static void Main(string[] args)
         {
 
             int quantidadeVeiculos;
+            string[] classificacoes;
 
             Console.WriteLine("Digite a quantidade de veículos: ");
             quantidadeVeiculos = int.Parse(Console.ReadLine());
 
+            classificacoes = new string[quantidadeVeiculos];
+
             for (int i = 0; i < quantidadeVeiculos; i++)
             {
-                string modelo;
-                double kmRodados;
-                int potenciaMotor;
+                Carro carroAtual = new Carro();
 
                 //Recebendo valores
 
                 Console.WriteLine("Digite o modelo: ");
-                modelo = Console.ReadLine();
+                carroAtual.nome = Console.ReadLine();
                 Console.WriteLine();
 
                 Console.WriteLine("Digite a quilometragem rodada: ");
-                kmRodados = Convert.ToDouble(Console.ReadLine());
+                carroAtual.kmRodados = Convert.ToDouble(Console.ReadLine());
                 Console.WriteLine();
 
                 Console.WriteLine("Digite a potencia do motor: ");
-                potenciaMotor = int.Parse(Console.ReadLine());
+                carroAtual.potenciaMotor = int.Parse(Console.ReadLine());
                 Console.WriteLine("----------------");
 
 
-                string resultado = Classificar(modelo, kmRodados, potenciaMotor);
-                Console.WriteLine(resultado);
+                classificacoes[i] = Classificar(carroAtual);
+            }
+
+            foreach (string cl in classificacoes)
+            {
+                Console.WriteLine(cl);
             }
 
         }
