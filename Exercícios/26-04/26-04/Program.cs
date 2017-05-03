@@ -1,27 +1,63 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace exercicios_lp2
+namespace ConsoleApplication1
 {
+
+    // (Revisão de subrotinas)
     class Program
     {
+
+
+        static string Classificar(string nome, double kmRodados, int potenciaMotor)
+        {
+            string idade;
+            string potenciaPorExtenso;
+
+            //Idade do carro
+            if (kmRodados <= 5000)
+                idade = "novo";
+
+            else if (kmRodados > 5000 && kmRodados <= 30000)
+                idade = "seminovo";
+
+            else
+                idade = "velho";
+
+            //Potencia 
+            if (potenciaMotor >= 120 && potenciaMotor <= 200)
+                potenciaPorExtenso = "forte";
+
+            else if (potenciaMotor > 200)
+                potenciaPorExtenso = "potente";
+
+            else
+                potenciaPorExtenso = "popular";
+
+            return nome + " " + idade + " " + potenciaPorExtenso;
+        }
+
         static void Main(string[] args)
         {
-            int quantidadeVeiculos;
-            string nome;
-            double kmRodados;
-            int potenciaMotor;
 
+            int quantidadeVeiculos;
 
             Console.WriteLine("Digite a quantidade de veículos: ");
             quantidadeVeiculos = int.Parse(Console.ReadLine());
 
             for (int i = 0; i < quantidadeVeiculos; i++)
             {
+                string modelo;
+                double kmRodados;
+                int potenciaMotor;
 
                 //Recebendo valores
 
                 Console.WriteLine("Digite o modelo: ");
-                nome = Console.ReadLine();
+                modelo = Console.ReadLine();
                 Console.WriteLine();
 
                 Console.WriteLine("Digite a quilometragem rodada: ");
@@ -32,31 +68,11 @@ namespace exercicios_lp2
                 potenciaMotor = int.Parse(Console.ReadLine());
                 Console.WriteLine("----------------");
 
-                string idade;
-                string potenciaPorExtenso;
 
-                //Idade do carro
-                if (kmRodados <= 5000)
-                    idade = "novo";
-
-                else if (kmRodados > 5000 && kmRodados <= 30000)
-                    idade = "seminovo";
-
-                else
-                    idade = "velho";
-
-                //Potencia 
-                if (potenciaMotor >= 120 && potenciaMotor <= 200)
-                    potenciaPorExtenso = "forte";
-
-                else if (potenciaMotor > 200)
-                    potenciaPorExtenso = "potente";
-
-                else
-                    potenciaPorExtenso = "popular";
-
-                Console.WriteLine("{0} - {1} {2}", nome, idade, potenciaPorExtenso);
+                string resultado = Classificar(modelo, kmRodados, potenciaMotor);
+                Console.WriteLine(resultado);
             }
+
         }
     }
 }
