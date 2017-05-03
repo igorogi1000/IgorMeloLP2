@@ -5,6 +5,7 @@ namespace exercicios_lp2
     class Program
     {
         // (Revisão de struct)
+        // (Revisão de struct)
 
         struct Carro
         {
@@ -43,9 +44,6 @@ namespace exercicios_lp2
         }
 
 
-
-
-
         static void Main(string[] args)
         {
 
@@ -76,14 +74,8 @@ namespace exercicios_lp2
                 Console.WriteLine("----------------");
 
 
-                classificacoes[i] = Classificar(carroAtual);
+                Console.WriteLine(Classificar(carroAtual));
             }
-
-            foreach (string cl in classificacoes)
-            {
-                Console.WriteLine(cl);
-            }
-
         }
     }
 }
