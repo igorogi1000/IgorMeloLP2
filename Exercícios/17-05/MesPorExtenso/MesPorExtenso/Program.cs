@@ -10,7 +10,7 @@ namespace MesPorExtenso
     {
         static void Main(string[] args)
         {
-            string ata = mesPorExtenso("17/05/2017");
+            string ata = mesPorExtenso(Console.ReadLine());
             Console.WriteLine(ata);
         }
 
