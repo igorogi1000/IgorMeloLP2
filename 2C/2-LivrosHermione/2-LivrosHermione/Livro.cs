@@ -12,9 +12,19 @@ namespace _2_LivrosHermione
         public int numeroPaginas;
         public int diasParaDevolucao;
 
-        public int TempoDeLeitura(int pagPorHora, int horasPorDia)
+        public int PaginasPorDia(int pagPorHora, int horasPorDia)
         {
             return pagPorHora * horasPorDia;               
+        }
+
+        public double DiasLeitura(int pagPorHora, int horasPorDia)
+        {
+            return (double) numeroPaginas / PaginasPorDia(pagPorHora, horasPorDia);
+        }
+
+        public bool isPossivelLer(int pagPorHora, int horasPorDia)
+        {
+            return DiasLeitura(pagPorHora, horasPorDia) <= diasParaDevolucao;
         }
     }
 }

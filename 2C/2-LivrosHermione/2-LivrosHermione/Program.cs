@@ -14,53 +14,54 @@ namespace _2_LivrosHermione
             int n = int.Parse(Console.ReadLine());
 
             Livro[] livros = new Livro[n];
-
-            Livro l = new Livro();
-
-            //l.TempoDeLeitura(12);
-
             string[] impossiveis = new string[n];
             int qtdImpossiveis = 0;
 
-            double horasParaLerTudo = 0;
+            double tempoTotal = 0;
 
             Console.WriteLine("Digite a velocidade de leitura de Hermione: ");
             int velocidade = int.Parse(Console.ReadLine());
 
+            Console.WriteLine("Digite a quantidade de horas dedicadas aos livros: ");
+            int horasPorDia = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Mec. Agora vem a parte chata...\n\n\n");
+
             for (int i = 0; i < n; i++)
             {
-                livros[i] = new Livro();
-                
-                Console.WriteLine("Digite o nome do livro: ");
-                livros[i].titulo = Console.ReadLine();
+                Livro l = new Livro();
 
-                Console.WriteLine("Digite o número de páginas: ");
-                livros[i].numeroPaginas = int.Parse(Console.ReadLine());
+                Console.WriteLine("Digite o título do livro: ");
+                l.titulo = Console.ReadLine();
+                Console.WriteLine();
 
-                Console.WriteLine("Digite o número de dias para devolução: ");
-                livros[i].diasParaDevolucao = int.Parse(Console.ReadLine());
+                Console.WriteLine("Digite o número de páginas de {0}: ", l.titulo);
+                l.numeroPaginas = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
-                Console.Write("\n\n");
+                Console.WriteLine("Digite o número de dias para devolver o livro {0}: ", l.titulo);
+                l.diasParaDevolucao = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
-                double tempoAtual = livros[i].TempoDeLeitura(velocidade);
+                tempoTotal += l.DiasLeitura(velocidade, horasPorDia);
 
-                horasParaLerTudo += tempoAtual;
-                if (tempoAtual / 24 > livros[i].diasParaDevolucao) {
-                    impossiveis[qtdImpossiveis] = livros[i].titulo;
+                if (!l.isPossivelLer(velocidade, horasPorDia))
+                {
+                    impossiveis[qtdImpossiveis] = l.titulo;
                     qtdImpossiveis++;
                 }
             }
-
-            if (qtdImpossiveis > 0)
-            {
-                Console.WriteLine("Estes livros são impossíveis de serem lidos com essa lerdeza: ");
-                for (int i = 0; i < qtdImpossiveis-1; i++)
-                {
-                    Console.WriteLine("{0}, ", impossiveis[i]);
-                }
-                Console.WriteLine(impossiveis[qtdImpossiveis - 1]);
-            }
             
+            Console.WriteLine("\n\n\n");
+            Console.WriteLine("Hermione levará {0} dias para ler todos os livros.", Math.Ceiling(tempoTotal));
+            Console.WriteLine("Esses livros são impossíveis de ser lidos: ");
+
+            for (int i = 0; i < qtdImpossiveis - 1; i++)
+            {
+                Console.Write("{0}, ", impossiveis[i]);
+            }
+
+            Console.WriteLine(impossiveis[qtdImpossiveis - 1]);
         }
     }
 }
