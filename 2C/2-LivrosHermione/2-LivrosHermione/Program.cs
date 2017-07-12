@@ -59,9 +59,12 @@ namespace _2_LivrosHermione
             for (int i = 0; i < qtdImpossiveis - 1; i++)
             {
                 Console.Write("{0}, ", impossiveis[i]);
+                
+                if (i == qtdImpossiveis-1)
+                    Console.WriteLine(impossiveis[qtdImpossiveis - 1]);
             }
-
-            Console.WriteLine(impossiveis[qtdImpossiveis - 1]);
+            
+            
         }
     }
 }
