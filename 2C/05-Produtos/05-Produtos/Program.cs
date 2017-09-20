@@ -10,11 +10,15 @@ namespace _05_Produtos
     {
         static void Main(string[] args)
         {
-            Produto proud = new Produto(1, "CresceFast - Para unhas 100g", 6.666);
-            proud.Reposicao(10);
-            proud.Retirada(1);
+            Produto crescefast = new Produto(1, "CresceFast - Para unhas 100g", 6.666);
+            crescefast.Reposicao(10);
+            crescefast.Retirada(1);
 
-            Console.WriteLine(proud.Imprimir());
+            Produto churros = new Produto(2, "Churros chocolate/leite condensado - 300g", 2.3);
+            crescefast.Reposicao(2);
+
+            Console.WriteLine(crescefast.ToString());
+            Console.WriteLine(churros.ToString());
         }
     }
 }

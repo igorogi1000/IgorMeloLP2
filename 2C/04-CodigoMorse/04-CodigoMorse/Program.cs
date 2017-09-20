@@ -11,9 +11,10 @@ namespace _04_CodigoMorse
         static void Main(string[] args)
         {
             Mensagem m = new Mensagem();
-            m.codificada = false;
-            m.texto = "ola marilene";
-            m.Transmitir();
+
+            m.texto = "OVO CASA";
+            Console.WriteLine(m.PortuguesParaMorse());
+            Console.WriteLine(m.MorseParaPortugues());
             //Console.WriteLine(m.PortuguesParaMorse("opa valeu"));
         }
     }

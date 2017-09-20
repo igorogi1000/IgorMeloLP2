@@ -9,7 +9,6 @@ namespace _04_CodigoMorse
     class Mensagem
     {
         public string texto { get; set;}
-        public bool codificada { get; set; }
 
         private int frequenciaNatural = 600; //par
         private int duracaoNatural = 200; //par
@@ -43,7 +42,7 @@ namespace _04_CodigoMorse
             "--..",
         };
 
-        public void test()
+        /*public void test()
         {
             int vezes = 0;
             
@@ -63,12 +62,12 @@ namespace _04_CodigoMorse
                 
                 vezes = 0;
             }
-        }
+        }*/
 
         public string PortuguesParaMorse()
         {
             string res = "";
-            char[] input = texto.ToUpper().ToCharArray();
+            char[] input = texto.ToCharArray();
 
             for (int i = 0; i < texto.Length; i++)
             {
@@ -81,7 +80,7 @@ namespace _04_CodigoMorse
                 }
                     
                 else if (input[i].ToString() == " ")
-                    somar = "\t";
+                    somar = "  ";
 
                 else
                     somar = input[i] + "";
@@ -104,10 +103,11 @@ namespace _04_CodigoMorse
                 
                 if (i == -1)
                 {
-                    if (letras[j] == "" || letras[j] == "/" && res[res.Length-1] != ' ')
+                    if (letras[j] == "" || letras[j] == "/" || 
+                        (letras[j] == "" && letras[j + 1] == "" && letras[j + 2] == "" && letras[j + 3] == "") &&
+                        res[res.Length - 1] != ' ')
                     {
-                        somar = " ";
-                        //Console.WriteLine("KKKKK");
+                        somar = " ";    
                     }
 
                     else
@@ -132,10 +132,7 @@ namespace _04_CodigoMorse
 
         public void Transmitir()
         {
-            string emMorse = texto;
-
-            if (!codificada)
-                emMorse = PortuguesParaMorse();
+            string emMorse = PortuguesParaMorse();
 
             for (int i = 0; i < emMorse.Length; i++)
             {

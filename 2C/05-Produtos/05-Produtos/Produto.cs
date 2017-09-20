@@ -46,20 +46,20 @@ namespace _05_Produtos
         public void Reposicao(int qtd)
         {
             if (qtd <= 0)
-                throw new Exception();
+                throw new Exception("Valor inválido");
             quantidade += qtd;
         }
 
         public void Retirada(int qtd)
         {
             if (qtd <= 0 || qtd > quantidade)
-                throw new Exception();
+                throw new Exception("Quantidade insuficiente ou 'qtd' inválida");
             quantidade -= qtd;
         }
 
-        public string Imprimir()
+        public string ToString()
         {
-            return String.Format("PRODUTO: {0}\tPRECO: R$ {1:0.00}\tQTE: {2}", nome, Preco, quantidade);
+            return String.Format("Produto {0}: {1} - R$ {2:0.00} - Estoque: {3}", id, nome, Preco, quantidade);
         }
     }
 }
