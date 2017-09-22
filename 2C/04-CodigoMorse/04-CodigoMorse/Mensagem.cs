@@ -1,18 +1,21 @@
-﻿using System;
+﻿/* (c) Copyright Igor Melo, all rights not reserved. */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Threading;
 namespace _04_CodigoMorse
 {
     class Mensagem
     {
-        public string texto { get; set;}
+        public string Texto { get; set; }
+        public bool Codificada { get; set; }
 
-        private int frequenciaNatural = 600; //par
-        private int duracaoNatural = 200; //par
-        private int pausaFreq = 137;
+        private int frequenciaNatural = 2000; //par
+        private int duracaoNatural = 240; //par
+        private int pausaDuracao = 300;
         private string[] alfabetoMorse = new string[] {
             ".-",
             "-...",
@@ -67,9 +70,9 @@ namespace _04_CodigoMorse
         public string PortuguesParaMorse()
         {
             string res = "";
-            char[] input = texto.ToCharArray();
+            char[] input = Texto.ToCharArray();
 
-            for (int i = 0; i < texto.Length; i++)
+            for (int i = 0; i < Texto.Length; i++)
             {
                 int index = input[i] - 'A';
                 string somar = "";  
@@ -88,61 +91,58 @@ namespace _04_CodigoMorse
                 res += somar;
                 res += " ";
             }
+            
             return res;
         }
 
         public string MorseParaPortugues()
         {
-            string res = "";
-            string[] letras = texto.Split(' ');
-
-            for (int j = 0; j < letras.Length; j++)
+            if (Codificada)
             {
-                string somar = "";
-                int i = Array.IndexOf(alfabetoMorse, letras[j]);
-                
-                if (i == -1)
-                {
-                    if (letras[j] == "" || letras[j] == "/" || 
-                        (letras[j] == "" && letras[j + 1] == "" && letras[j + 2] == "" && letras[j + 3] == "") &&
-                        res[res.Length - 1] != ' ')
-                    {
-                        somar = " ";    
-                    }
+                string res = "";
 
+                string[] letras = Texto.Split(' ');
+
+                foreach (string letra in letras)
+                {
+                    int index = Array.IndexOf(alfabetoMorse, letra);
+                    
+                    if (index != -1)
+                    {
+                        char ch = (char)(index + 'A');
+                        Console.Write(ch);
+                    }
                     else
-                    {
-                        somar = letras[j];
-                    }
+                        Console.Write(" ");
                 }
-
-                else
-                {
-                    char ch = (char) (i + 'a');
-                    somar = ch + "";
-                    //Console.WriteLine(somar);
-                }
-
-                res += somar;
-                somar = "";
+                return res;
             }
 
-            return res;
+            throw new Exception("A mensagem não está codificada!");
         }
 
         public void Transmitir()
         {
-            string emMorse = PortuguesParaMorse();
+            string emMorse = Texto;
+            
+            if (!Codificada)
+                emMorse = PortuguesParaMorse();
 
             for (int i = 0; i < emMorse.Length; i++)
             {
                 if (emMorse[i] == '.')
-                    Console.Beep(frequenciaNatural, duracaoNatural/2);
+                    Console.Beep(frequenciaNatural, duracaoNatural / 2);
                 else if (emMorse[i] == '-')
                     Console.Beep(frequenciaNatural, duracaoNatural);
                 else
-                    Console.Beep(pausaFreq, duracaoNatural);
+                    Thread.Sleep(pausaDuracao);
+                    //Console.Beep(pausaFreq, duracaoNatural);
             }
+        }
+
+        public Mensagem()
+        {
+            Codificada = false;
         }
     }
 }
