@@ -1,4 +1,6 @@
-﻿using System;
+﻿/* (C) 2017 Copyright Igor Melo. All rights reserved. */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,8 @@ namespace _08_Empresa
     {
         static void Main(string[] args)
         {
+            Empregado e = new Empregado(1);
+            Console.WriteLine(e.Registro);
         }
     }
 }
